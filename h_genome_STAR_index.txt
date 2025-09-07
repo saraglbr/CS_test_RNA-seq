@@ -1,0 +1,17 @@
+
+#!/bin/bash
+#$ -N h_genome_index
+#$ -cwd 
+#$ -pe sharedmem 7 
+#$ -l h_rt=24:00:00 
+#$ -l h_vmem=20G
+#$ -e h_genome_index_error.txt
+#$ -o h_genome_index_output.tx
+
+## Initialising the environment modules
+. /etc/profile.d/modules.sh
+
+#Load module
+module load igmm/apps/STAR/2.7.11b 
+
+STAR --runThreadN 6 --runMode genomeGenerate --genomeDir /exports/eddie/scratch/s1659595/human_genome --genomeFastaFiles /exports/eddie/scratch/s1659595/human_genome/GRCh38.p14.genome.fa --sjdbGTFfile /exports/eddie/scratch/s1659595/human_genome/gencode.v49.annotation.gtf
